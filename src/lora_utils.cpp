@@ -31,6 +31,10 @@ bool transmitFlag    = true;
     SX1276 radio = new Module(RADIO_CS_PIN, RADIO_BUSY_PIN, RADIO_RST_PIN);
 #endif
 
+#ifdef HAS_LLCC68
+    LLCC68 radio = new Module(RADIO_CS_PIN, RADIO_DIO1_PIN, RADIO_RST_PIN, RADIO_BUSY_PIN);
+#endif
+
 int rssi, freqError;
 float snr;
 
@@ -53,7 +57,7 @@ namespace LoRa_Utils {
             Utils::println("Starting LoRa failed! State: " + String(state));
             while (true);
         }
-        #if defined(HAS_SX1262) || defined(HAS_SX1268)
+        #if defined(HAS_SX1262) || defined(HAS_SX1268) || defined(HAS_LLCC68)
             if (!Config.lowPowerMode) {
                 radio.setDio1Action(setFlag);
             } else {
@@ -81,12 +85,12 @@ namespace LoRa_Utils {
             state = radio.setOutputPower(Config.loramodule.power); // max value 20dB for 400M30S as it has Low Noise Amp
             radio.setCurrentLimit(100); // to be validated (80 , 100)?
         #endif
-        #if (defined(HAS_SX1268) || defined(HAS_SX1262)) && !defined(HAS_1W_LORA)
+        #if (defined(HAS_SX1268) || defined(HAS_SX1262)) || defined(HAS_LLCC68) && !defined(HAS_1W_LORA)
             state = radio.setOutputPower(Config.loramodule.power + 2); // values available: 10, 17, 22 --> if 20 in tracker_conf.json it will be updated to 22.
             radio.setCurrentLimit(140);
         #endif
 
-        #if defined(HAS_SX1262) || defined(HAS_SX1268)
+        #if defined(HAS_SX1262) || defined(HAS_SX1268) || defined(HAS_LLCC68)
             radio.setRxBoostedGainMode(true);
         #endif
 
