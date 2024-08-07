@@ -108,7 +108,7 @@ namespace BATTERY_Utils {
             #endif
 
             for (int i = 0; i < 100; i++) {
-                #if defined(ESP32_DIY_LoRa) || defined(ESP32_DIY_LoRa_915) || defined(ESP32_DIY_1W_LoRa) || defined(ESP32_DIY_1W_LoRa_915)
+                #if defined(ESP32_DIY_LoRa) || defined(ESP32_DIY_LoRa_915) || defined(ESP32_DIY_1W_LoRa) || defined(ESP32_DIY_1W_LoRa_915) || defined(ESP32_DIY_1W_LoRa_LLCC68)
                     sample = 0;
                 #else
                     #ifdef HAS_ADC_CALIBRATION

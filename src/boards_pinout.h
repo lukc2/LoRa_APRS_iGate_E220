@@ -28,7 +28,7 @@
     #define RADIO_BUSY_PIN  13  // SX1262 BUSY
 #endif
 
-#if defined(ESP32_DIY_1W_LoRa) || defined(ESP32_DIY_1W_LoRa_915)    // Ebyte E22 400M30S (SX1268) or E22 900M30S (SX1262)
+#if defined(ESP32_DIY_1W_LoRa) || defined(ESP32_DIY_1W_LoRa_915) || defined(ESP32_DIY_1W_LoRa_LLCC68)   // Ebyte E22 400M30S (SX1268) or E22 900M30S (SX1262)
     #define RADIO_SCLK_PIN  18
     #define RADIO_MISO_PIN  19
     #define RADIO_MOSI_PIN  23
